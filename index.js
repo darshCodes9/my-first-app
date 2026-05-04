@@ -28,10 +28,13 @@ app.get("/health", function(request, response) {
   });
 });
 
-app.listen(PORT, function() {
-  console.log("Server is running at http://localhost:" + PORT);
-  console.log("Try these URLs in your browser:");
-  console.log("  http://localhost:3000/");
-  console.log("  http://localhost:3000/greet/Dhaval");
-  console.log("  http://localhost:3000/health");
-});
+// Only start the server if this file is run directly
+// If it's imported by tests, we skip this part
+if (require.main === module) {
+  app.listen(PORT, function() {
+    console.log("Server is running at http://localhost:" + PORT);
+  });
+}
+
+// Export the app so tests can import it
+module.exports = app;
