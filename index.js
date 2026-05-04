@@ -1,10 +1,37 @@
-// This is a comment. Comments are notes for humans, ignored by the computer.
+const express = require("express");
 
-// We're creating a simple greeting function
-function greet(name) {
-  return "Hello, " + name + "! Welcome to your first app.";
-}
+const app = express();
 
-// Call the function and print the result
-console.log(greet("Dhaval"));
-console.log(greet("World"));
+app.use(express.json());
+
+const PORT = 3000;
+
+app.get("/", function(request, response) {
+  response.json({
+    message: "Welcome to my first app!",
+    status: "running"
+  });
+});
+
+app.get("/greet/:name", function(request, response) {
+  const name = request.params.name;
+  response.json({
+    message: "Hello, " + name + "!",
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/health", function(request, response) {
+  response.json({
+    status: "healthy",
+    uptime: process.uptime() + " seconds"
+  });
+});
+
+app.listen(PORT, function() {
+  console.log("Server is running at http://localhost:" + PORT);
+  console.log("Try these URLs in your browser:");
+  console.log("  http://localhost:3000/");
+  console.log("  http://localhost:3000/greet/Dhaval");
+  console.log("  http://localhost:3000/health");
+});
