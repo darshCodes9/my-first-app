@@ -16,7 +16,7 @@ describe("Home Route", function() {
     expect(response.status).toBe(200);
 
     // Check the response contains our message
-    expect(response.body.message).toBe("Welcome to my first app!");
+    expect(response.body.message).toBe("I broke this on purpose");
 
     // Check the status field says "running"
     expect(response.body.status).toBe("running");
