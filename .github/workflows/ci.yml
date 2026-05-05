@@ -1,0 +1,37 @@
+# Name of your pipeline - shows up on GitHub
+name: CI Pipeline
+
+# When to run this pipeline
+# This says: run every time anyone pushes code to master branch
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# A pipeline is made of "jobs"
+# Each job runs on a fresh computer provided by GitHub
+jobs:
+  test:
+    # Use a fresh Ubuntu Linux computer
+    runs-on: ubuntu-latest
+
+    # Steps run one by one, in order
+    steps:
+      # Step 1: Download your code onto the runner computer
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Install Node.js on the runner computer
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # Step 3: Install your project dependencies (express, jest, supertest)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run your tests
+      - name: Run tests
+        run: npm test
