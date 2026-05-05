@@ -16,7 +16,7 @@ describe("Home Route", function() {
     expect(response.status).toBe(200);
 
     // Check the response contains our message
-    expect(response.body.message).toBe("My first fullstack app");
+    expect(response.body.message).toBe("Welcome to my first app!");
 
     // Check the status field says "running"
     expect(response.body.status).toBe("running");
